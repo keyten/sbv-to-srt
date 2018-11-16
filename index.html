@@ -73,11 +73,11 @@ ${splitText(str[9], stringMaxLine).join('\n')}`
 }
 
 window.convert = function(){
-	var sub = document.getElementById('val').textContent;
+	var sub = document.getElementById('val').value;
 	var strline = Number(document.getElementById('strline').value);
 	stringMaxLine = strline;
 	var srt = sub.match(sbvRegGlobal).map(sbvToSrt).join('\n\n');
-	document.getElementById('val').textContent = srt;
+	document.getElementById('val').value = srt;
 };	   
 </script>
 <style>
