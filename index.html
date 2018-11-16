@@ -24,10 +24,10 @@
       <div>
 	      <!-- <h1 class="project-name">sbv-to-srt</h1>
       <h2 class="project-tagline"></h2> -->
-	      <textarea></textarea>
-	      <input type="text" placeholder="Maximum string line" value="55" />
+	      <textarea id="val"></textarea>
+	      <input type="text" placeholder="Maximum string line" id="strline" value="55" />
       
-        <a href="https://github.com/keyten/sbv-to-srt" class="btn">Convert</a>
+        <a href="#" onclick="window.convert()" class="btn">Convert</a>
       
 	    </div>
     </section>
@@ -72,7 +72,13 @@ ${splitText(str[9], stringMaxLine).join('\n')}`
  );
 }
 
-var srt = sub.match(sbvRegGlobal).map(sbvToSrt).join('\n\n');
+window.convert = function(){
+	var val = document.getElementById('val').textContent;
+	var strline = Number(document.getElementById('strline').value);
+	stringMaxLine = strline;
+	var srt = sub.match(sbvRegGlobal).map(sbvToSrt).join('\n\n');
+	document.getElementById('val').textContent = srt;
+};	   
 </script>
 <style>
 	input, textarea {
@@ -81,6 +87,9 @@ var srt = sub.match(sbvRegGlobal).map(sbvToSrt).join('\n\n');
 		border-radius: 5px;
 		width: 100%;
 		padding: 10px;
+	}
+	textarea {
+		height: 250px;
 	}
 	a {
 		margin-top: 20px;
