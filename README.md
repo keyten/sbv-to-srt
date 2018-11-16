@@ -1,3 +1,45 @@
+<script>
+  
+  
+var stringMaxLine = 55;
+
+function splitText(t, w){
+ var lines = [];
+ t = t.split(' ');
+ var curline = '', testline;
+ for(var i = 0; i < t.length; i++){
+  testline = curline + t[i] + ' ';
+  if(testline.length > w){
+   lines.push(curline);
+   curline = t[i] + ' ';
+  } else {
+   curline = testline;
+  }
+ }
+ return lines.length === 0 ? [t.join(' ')] : lines.concat([curline]);
+}
+
+function normalizeNumber(n){
+	n = parseInt(n);
+	return n < 10 ? '0' + n : '' + n;
+}
+
+var sbvReg = /(\d+)\:(\d+)\:(\d+)\.(\d+)\,(\d+)\:(\d+)\:(\d+)\.(\d+)\n(.+)/;
+var sbvRegGlobal = /(\d+)\:(\d+)\:(\d+)\.(\d+)\,(\d+)\:(\d+)\:(\d+)\.(\d+)\n(.+)/g;
+
+function sbvToSrt(str, i){
+ str = str.match(sbvReg);
+
+ return (
+`${i+1}
+${normalizeNumber(str[1])}:${str[2]}:${str[3]},${str[4]} --> ${normalizeNumber(str[5])}:${str[6]}:${str[7]},${str[8]}
+${splitText(str[9], stringMaxLine).join('\n')}`
+ );
+}
+
+var srt = sub.match(sbvRegGlobal).map(sbvToSrt).join('\n\n');
+</script>
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/keyten/sbv-to-srt/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
