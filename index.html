@@ -72,6 +72,14 @@ ${splitText(str[9], stringMaxLine).join('\n')}`
 var srt = sub.match(sbvRegGlobal).map(sbvToSrt).join('\n\n');
 </script>
 <style>
+	body, html {
+		width: 100%;
+		height: 100%;
+	}
+	
+	body {
+		display: grid;
+	}
 .main-content {
 display: none;
 }
